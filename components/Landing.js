@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import Head from "next/head";
 
 function Landing({ setLoggedIn }) {
   return (
     <Container>
+      <Head>
+        <title>Disney Plus Clone</title>
+        <desc>This is a clone of Disney+ and not the real site.</desc>
+      </Head>
       <Disneylogo src="/images/logo.svg" alt="" />
       <Content>
         <Logos src="/images/cta-logo-one.svg" alt="" />
