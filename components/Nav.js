@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Themes from "../Utils/Themes";
 import Link from "next/link";
@@ -9,17 +9,37 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 
+import { CgLogOut } from "react-icons/cg";
+
 import { FiVideo } from "react-icons/fi";
 
 import { MdOutlineDownloading } from "react-icons/md";
 
-function Nav() {
+function Nav({ isOpen, setIsOpen, setLoggedIn }) {
+  const wrapperRef = React.useRef(null);
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
   return (
-    <Container>
-      <Avatar
+    <Container isOpen={isOpen} ref={wrapperRef}>
+      {/* <Avatar
         src="https://i.scdn.co/image/ab6761610000e5eb62577ac7c0de20745e3fc74c"
         alt=""
-      />
+      /> */}
       <NavBar>
         <Link href="/" passHref>
           <Icon active>
@@ -46,6 +66,9 @@ function Nav() {
             <AiOutlineSetting />
           </Icon>
         </Link>
+        <Icon onClick={() => setLoggedIn(false)}>
+          <CgLogOut />
+        </Icon>
       </NavBar>
     </Container>
   );
@@ -66,6 +89,17 @@ const Container = styled.div`
   z-index: 200;
   left: 0;
   top: 0;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    z-index: 800;
+    right: 0;
+    left: auto;
+
+    overflow: hidden;
+    max-width: ${({ isOpen }) => (isOpen ? "80px" : "0")};
+    transition: max-width 0.3s ease-in;
+  }
 `;
 
 const Avatar = styled.img`
@@ -90,6 +124,7 @@ const Icon = styled.a`
   padding: 0.6rem;
   color: #fff;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     background: ${(p) => (p.active ? "#4e515c" : "#818696")};

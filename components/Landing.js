@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function Landing() {
+function Landing({ setLoggedIn }) {
   return (
     <Container>
       <Disneylogo src="/images/logo.svg" alt="" />
       <Content>
         <Logos src="/images/cta-logo-one.svg" alt="" />
-        <Button>Try Now</Button>
+        <Button onClick={() => setLoggedIn(true)}>Try Now</Button>
         <Desc>
           Start streaming all these with your 7-day promotional offer, then only
           $12.99/MONTH

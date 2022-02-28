@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Nav from "../Nav";
 import Poster from "./Poster";
 
-function Dashboard() {
+function Dashboard({ setLoggedIn }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Container>
-      <Nav />
-      <Poster />
+      <Nav isOpen={isOpen} setIsOpen={setIsOpen} setLoggedIn={setLoggedIn} />
+      <Poster setIsOpen={setIsOpen} />
     </Container>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Themes from "../../Utils/Themes";
 
-function Header() {
+function Header({ setIsOpen }) {
   const [scroll, setScroll] = useState(0);
   const handleScroll = () => setScroll(window.scrollY);
 
@@ -14,7 +14,7 @@ function Header() {
   return (
     <Container scroll={scroll}>
       <Logo src="/images/logo.svg" alt="logo" />
-      <Studios>
+      {/* <Studios>
         <Studio active>
           <Bar />
           <StudioImage src="/images/favicon.svg" />
@@ -33,7 +33,12 @@ function Header() {
         <Studio>
           <Bar />
         </Studio>
-      </Studios>
+      </Studios> */}
+      <Hamburger onClick={() => setIsOpen(true)}>
+        <span />
+        <span />
+        <span />
+      </Hamburger>
     </Container>
   );
 }
@@ -42,9 +47,9 @@ export default Header;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   column-gap: 1.5rem;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   width: 100%;
@@ -95,4 +100,20 @@ const StudioImage = styled.img`
   position: absolute;
   height: 100%;
   object-fit: stretch;
+`;
+
+const Hamburger = styled.div`
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  span {
+    height: 2.5px;
+    width: 25px;
+    background: ${Themes.colors.blue};
+    margin-bottom: 4px;
+    border-radius: 5px;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;

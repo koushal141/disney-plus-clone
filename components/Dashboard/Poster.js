@@ -5,10 +5,10 @@ import { BsPlay } from "react-icons/bs";
 import Header from "./Header";
 import Library from "./Library";
 
-function Poster() {
+function Poster({ setIsOpen }) {
   return (
     <Container>
-      <Header />
+      <Header setIsOpen={setIsOpen} />
       <PosterBG>
         <TopGradient />
         <BottomGradient />
