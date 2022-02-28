@@ -29,7 +29,7 @@ function Poster({ setIsOpen }) {
           A grown-up Simba rescues Timon and Pumbaa from a hungry lioness, who
           turns out to be Nala. She and Simba reunite and fall in love, and she
           urges him to return home, telling him that the Pride Lands have become
-          a drought-stricken wasteland under Scar's reign.
+          a drought-stricken wasteland under {"Scar's"} reign.
         </Desc>
       </Details>
       <Companies>
